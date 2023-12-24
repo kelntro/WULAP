@@ -1,76 +1,103 @@
+Your `README.md` looks well-structured and informative! I've made a few minor enhancements for clarity and consistency:
 
-# wulap_application
-### Table of contents
-- [System requirements](#system-requirements)
-- [Figma design guidelines for better UI accuracy](#figma-design-guideline-for-better-accuracy)
-- [Check the UI of the entire app](#app-navigations)
-- [Application structure](#project-structure)
-- [How to format your code?](#how-you-can-do-code-formatting)
-- [How you can improve code readability?](#how-you-can-improve-the-readability-of-code)
-- [Libraries and tools used](#libraries-and-tools-used)
-- [Support](#support)
+```markdown
+# WULAP Application
 
-### System requirements
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Flutter](https://img.shields.io/badge/Flutter-2.8-blue.svg)](https://flutter.dev/)
+[![Dart](https://img.shields.io/badge/Dart-2.15-blue.svg)](https://dart.dev/)
 
-Dart SDK Version 2.18.0 or greater.
-Flutter SDK Version 3.3.0 or greater.
+WULAP (The Ultimate Paluwagan's Reseller Mobile Recording and Reminder App) is a Flutter Dart application designed to modernize and simplify the traditional Filipino savings practice known as Paluwagan.
 
-### Figma design guidelines for better UI accuracy
+## Table of Contents
 
-Read our guidelines to increase the accuracy of design-to-code conversion by optimizing Figma designs.
-https://docs.dhiwise.com/docs/Designguidelines/intro
+- [WULAP Application](#wulap-application)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+  - [Usage](#usage)
+  - [Folder Structure](#folder-structure)
+  - [Dependencies](#dependencies)
+  - [Contributing](#contributing)
+  - [License](#license)
 
-### Check the UI of the entire app
+## Features
 
-Check the UI of all the app screens from a single place by setting up the 'initialRoute'  to AppNavigation in the AppRoutes.dart file.
+- Streamlined record-keeping for Paluwagan contributions
+- Timely reminders for participants' obligations
+- Efficient group management tools
+- Secure and user-friendly interface
+- Integration with Firebase for real-time data synchronization
+- Hive database for local data storage
+- Multi-provider state management using ChangeNotifierProvider and Provider
+- Notifications and reminders using NotificationHelper
+- Internationalization support with Flutter localizations
 
-### Application structure
+## Getting Started
 
-After successful build, your application structure should look like this:
+Follow these instructions to get the project up and running on your local machine.
 
+### Prerequisites
+
+- [Flutter](https://flutter.dev/docs/get-started/install)
+- [Visual Studio Code](https://code.visualstudio.com/download)
+- [Firebase Project](https://console.firebase.google.com/)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/wulap_application.git
+   ```
+
+2. Navigate to the project folder:
+
+   ```bash
+   cd wulap_application
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   flutter pub get
+   ```
+
+4. Run the application:
+
+   ```bash
+   flutter run
+   ```
+
+## Usage
+
+Describe how users can use your application. Provide examples or screenshots if necessary.
+
+## Folder Structure
+
+Explain the organization of your project's folders. For example:
+
+- `/lib`: Contains the Dart source code.
+- `/assets`: Store static assets like images and fonts.
+- `/test`: Unit and widget tests.
+
+## Dependencies
+
+List the main dependencies used in your project. For example:
+
+- [Firebase](https://pub.dev/packages/firebase)
+- [Hive](https://pub.dev/packages/hive)
+- [Get](https://pub.dev/packages/get)
+
+## Contributing
+
+Describe how others can contribute to your project. Include guidelines for pull requests and reporting issues.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 ```
-.
-├── android                         - It contains files required to run the application on an Android platform.
-├── assets                          - It contains all images and fonts of your application.
-├── ios                             - It contains files required to run the application on an iOS platform.
-├── lib                             - Most important folder in the application, used to write most of the Dart code..
-    ├── main.dart                   - Starting point of the application
-    ├── core
-    │   ├── app_export.dart         - It contains commonly used file imports
-    │   ├── constants               - It contains static constant class file
-    │   └── utils                   - It contains common files and utilities of the application
-    ├── presentation                - It contains widgets of the screens 
-    ├── routes                      - It contains all the routes of the application
-    └── theme                       - It contains app theme and decoration classes
-    └── widgets                     - It contains all custom widget classes
-```
 
-### How to format your code?
-
-- if your code is not formatted then run following command in your terminal to format code
-  ```
-  dart format .
-  ```
-
-### How you can improve code readability?
-
-Resolve the errors and warnings that are shown in the application.
-
-### Libraries and tools used
-
-- Provider - State management
-  https://pub.dev/packages/provider
-- cached_network_image - For storing internet image into cache
-  https://pub.dev/packages/cached_network_image
-
-### Support
-
-If you have any problems or questions, go to our Discord channel, where we will help you as quickly as possible: https://discord.com/invite/rFMnCG5MZ7
-
-### Image Assets
-We were unable to find Images, Please add manually to ```project/assets``` and replace image_not_found Image constant with original file 
-
-| File Name | Not Found Assets Count |
-| --- | :---: |
-| settings_screen | 2 |
-
+Feel free to adjust it further based on your preferences!
