@@ -23,7 +23,6 @@ WULAP (The Ultimate Paluwagan's Reseller Mobile Recording and Reminder App) is a
     - [Pull Requests](#pull-requests)
     - [Code Guidelines](#code-guidelines)
     - [Code of Conduct](#code-of-conduct)
-  - [License](#license)
 
 ## Features
 
@@ -154,7 +153,3 @@ Please adhere to the following guidelines when contributing code:
 Be respectful and considerate when contributing to the WULAP project. Follow our [Code of Conduct](CODE_OF_CONDUCT.md) to ensure a positive and inclusive environment for everyone.
 
 Thank you for considering contributing to the WULAP application!
-
-## License
-
-WULAP Application is open-source software licensed under the [MIT License](LICENSE.md). See the [LICENSE.md](LICENSE.md) file for details.
