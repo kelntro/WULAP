@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "63809694970",
+    "project_id": "wulap-mobile",
+    "storage_bucket": "wulap-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63809694970:android:3bd4b6cc68c0fb3be2ad43",
+        "android_client_info": {
+          "package_name": "com.wulapapplication.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63809694970-vuh5t0enkdnhuv0qap1igc944v5ang5t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wulapapplication.app",
+            "certificate_hash": "cce24dcf2889c8775a0aa037727da67b110feaa7"
+          }
+        },
+        {
+          "client_id": "63809694970-3ju25s26arn8l9h8b086inm2oh00eom0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbu-RJYI3Ws1R4y7Ltmp287zUsNsAWZGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63809694970-3ju25s26arn8l9h8b086inm2oh00eom0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "63809694970-k50lj86l5qv5gjoeoupd55j9u37e518b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wulapapplication.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
