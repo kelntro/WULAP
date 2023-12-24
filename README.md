@@ -1,6 +1,3 @@
-Your `README.md` looks well-structured and informative! I've made a few minor enhancements for clarity and consistency:
-
-```markdown
 # WULAP Application
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -98,6 +95,3 @@ Describe how others can contribute to your project. Include guidelines for pull 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-```
-
-Feel free to adjust it further based on your preferences!
