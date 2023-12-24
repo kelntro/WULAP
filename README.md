@@ -1,6 +1,5 @@
 # WULAP Application
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Flutter](https://img.shields.io/badge/Flutter-2.8-blue.svg)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-2.15-blue.svg)](https://dart.dev/)
 
