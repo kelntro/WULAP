@@ -122,38 +122,53 @@ class _ReminderScreenState extends State<ReminderScreen> {
     );
   }
 
+  bool hasSpecialCharacters(String value) {
+    // Check if the value is not empty and contains any special characters
+    return value.isNotEmpty && RegExp(r'[!@#%^&*(),.?":{}|<>]').hasMatch(value);
+  }
+
   Future<void> _saveReminder() async {
     // Perform validation and save the reminder
     if (_titleController.text.isNotEmpty) {
       String title = _titleController.text;
       String description = _descriptionController.text;
 
-      // Combine selected date and time
-      DateTime reminderDateTime = DateTime(
-        _selectedDate.year,
-        _selectedDate.month,
-        _selectedDate.day,
-        _selectedTime.hour,
-        _selectedTime.minute,
-      );
+      // Check for special characters in the title
+      if (!hasSpecialCharacters(title)) {
+        // Combine selected date and time
+        DateTime reminderDateTime = DateTime(
+          _selectedDate.year,
+          _selectedDate.month,
+          _selectedDate.day,
+          _selectedTime.hour,
+          _selectedTime.minute,
+        );
 
-      // Create a Reminder object
-      Reminder reminder = Reminder(
-        title: title,
-        description: description,
-        dateTime: reminderDateTime,
-      );
+        // Create a Reminder object
+        Reminder reminder = Reminder(
+          title: title,
+          description: description,
+          dateTime: reminderDateTime,
+        );
 
-      // Initialize the ReminderProvider (if not already initialized)
-      await _initializeReminderProvider();
+        // Initialize the ReminderProvider (if not already initialized)
+        await _initializeReminderProvider();
 
-      // Save the reminder using the provider
-      await _reminderProvider.addReminder(reminder);
+        // Save the reminder using the provider
+        await _reminderProvider.addReminder(reminder);
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => RemindersListScreen()),
-      );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => RemindersListScreen()),
+        );
+      } else {
+        // Show an error message using Snackbar if the title contains special characters
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Title must not contain special characters.'),
+          ),
+        );
+      }
     } else {
       // Show an error message using Snackbar if the title is empty
       ScaffoldMessenger.of(context).showSnackBar(

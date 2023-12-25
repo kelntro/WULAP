@@ -125,6 +125,7 @@ class _DashboardPaluwaganScreenState extends State<DashboardPaluwaganScreen> {
           itemCount: categories.length,
           itemBuilder: (context, index) {
             final category = categories[index];
+
             return Padding(
               padding: EdgeInsets.only(
                 left: index % 2 == 1 ? 0.0 : 12.0,
@@ -170,34 +171,50 @@ class _DashboardPaluwaganScreenState extends State<DashboardPaluwaganScreen> {
                               child: PopupMenuButton(
                                 itemBuilder: (BuildContext context) => [
                                   PopupMenuItem(
-                                    child: ListTile(
-                                      leading: Icon(Icons.edit),
-                                      title: Text('Edit'),
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                        _editCategory(category);
-                                      },
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                            width:
+                                                8.0), // Adjust the space before the icons
+                                        Icon(Icons.edit),
+                                        SizedBox(
+                                            width:
+                                                8.0), // Adjust the space between the icon and text
+                                        Text('Edit'),
+                                      ],
                                     ),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      _editCategory(category);
+                                    },
                                   ),
                                   PopupMenuItem(
-                                    child: ListTile(
-                                      leading: Icon(Icons.delete),
-                                      title: Text('Delete'),
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                        _deleteCategory(category);
-                                      },
+                                    child: Row(
+                                      children: [
+                                        SizedBox(width: 8.0),
+                                        Icon(Icons.delete),
+                                        SizedBox(width: 8.0),
+                                        Text('Delete'),
+                                      ],
                                     ),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      _deleteCategory(category);
+                                    },
                                   ),
                                   PopupMenuItem(
-                                    child: ListTile(
-                                      leading: Icon(Icons.add),
-                                      title: Text('Add Menu'),
-                                      onTap: () {
-                                        _navigateToAddMenuScreen(
-                                            context, category.categoryID);
-                                      },
+                                    child: Row(
+                                      children: [
+                                        SizedBox(width: 8.0),
+                                        Icon(Icons.add),
+                                        SizedBox(width: 8.0),
+                                        Text('Add Menu'),
+                                      ],
                                     ),
+                                    onTap: () {
+                                      _navigateToAddMenuScreen(
+                                          context, category.categoryID);
+                                    },
                                   ),
                                 ],
                               ),

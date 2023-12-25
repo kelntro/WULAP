@@ -251,13 +251,28 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
       );
 
       if (selectedImage != null) {
-        setState(() {
-          imagePath = selectedImage.path;
-        });
+        // Check if the selected file has a valid extension
+        if (_isValidImageExtension(selectedImage.path)) {
+          setState(() {
+            imagePath = selectedImage.path;
+          });
+        } else {
+          // Handle the case where the selected file is not a JPEG or PNG
+          // You can show an error message or perform any other necessary action
+          print("Invalid file format. Please choose a JPEG or PNG file.");
+        }
       }
     } catch (e) {
       print('Error selecting image: $e');
     }
+  }
+
+  bool _isValidImageExtension(String filePath) {
+    // Get the file extension
+    String extension = filePath.split('.').last.toLowerCase();
+
+    // Check if the extension is JPEG or PNG
+    return extension == 'jpg' || extension == 'jpeg' || extension == 'png';
   }
 
   Future<void> _selectDate(BuildContext context) async {

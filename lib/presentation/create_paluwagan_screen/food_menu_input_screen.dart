@@ -36,9 +36,24 @@ class _FoodMenuInputScreenState extends State<FoodMenuInputScreen> {
 
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        // Check if the selected file has a valid extension
+        if (_isValidImageExtension(pickedFile.path)) {
+          _image = File(pickedFile.path);
+        } else {
+          // Handle the case where the selected file is not a JPEG or PNG
+          // You can show an error message or perform any other necessary action
+          print("Invalid file format. Please choose a JPEG or PNG file.");
+        }
       }
     });
+  }
+
+  bool _isValidImageExtension(String filePath) {
+    // Get the file extension
+    String extension = filePath.split('.').last.toLowerCase();
+
+    // Check if the extension is JPEG or PNG
+    return extension == 'jpg' || extension == 'jpeg' || extension == 'png';
   }
 
   Future<void> _pickStartDate() async {
@@ -202,40 +217,29 @@ class _FoodMenuInputScreenState extends State<FoodMenuInputScreen> {
                 TextButton(
                   onPressed: () {
                     if (!_isValidMemberName(newMember.name)) {
-                      _showErrorSnackbar(
-                        'Please enter a valid member name with letters and spaces only.',
-                      );
-                      return;
+                      _showErrorDialog(
+                          'Please enter a valid member name with letters and spaces only.');
+                      return null;
                     }
 
                     if (!RegExp(
                       r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
                     ).hasMatch(newMember.email)) {
-                      _showErrorSnackbar('Please enter a valid email address.');
-                      return;
+                      _showErrorDialog('Please enter a valid email address.');
+                      return null;
                     }
 
-                    if (!RegExp(r'^[a-zA-Z0-9\s]+$')
-                        .hasMatch(newMember.address)) {
-                      _showErrorSnackbar(
-                        'Please enter a valid address without special characters.',
-                      );
-                      return;
+                    if (!validatePhoneNumber(newMember.phoneNumber)) {
+                      _showErrorDialog(
+                          'Please enter a valid Philippine phone number.');
+                      return null;
                     }
 
                     if (!RegExp(r'^[a-zA-Z0-9. ]+$')
                         .hasMatch(newMember.facebookName)) {
-                      _showErrorSnackbar(
-                        'Please enter a valid Facebook account without special characters.',
-                      );
-                      return;
-                    }
-
-                    if (!validatePhoneNumber(newMember.phoneNumber)) {
-                      _showErrorSnackbar(
-                        'Please enter a valid Philippine phone number.',
-                      );
-                      return;
+                      _showErrorDialog(
+                          'Please enter a valid Facebook account without special characters.');
+                      return null;
                     }
 
                     newMember.name = nameController.text;
@@ -312,11 +316,18 @@ class _FoodMenuInputScreenState extends State<FoodMenuInputScreen> {
     }
   }
 
-  void _showErrorSnackbar(String errorMessage) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+  void _showErrorDialog(String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Error"),
         content: Text(errorMessage),
-        duration: Duration(seconds: 2),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("OK"),
+          ),
+        ],
       ),
     );
   }
@@ -551,30 +562,15 @@ class _FoodMenuInputScreenState extends State<FoodMenuInputScreen> {
                 labelText: 'Amount',
                 border: OutlineInputBorder(),
               ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-              ],
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
               onChanged: (value) {
+                // You can perform additional validation here if needed
                 if (isValidNumber(value)) {
-                  // Check if the entered value is a whole number
-                  if (value.endsWith('.') || value.contains('.')) {
-                    // Limit the display to two decimal places after the decimal point
-                    double amount = double.parse(value);
-                    String formattedValue = amount.toStringAsFixed(2);
-
-                    // If the entered value is a whole number, add .00
-                    if (amount % 1 == 0) {
-                      formattedValue = amount.toStringAsFixed(2);
-                    }
-
-                    totalPriceController.value =
-                        totalPriceController.value.copyWith(
-                      text: formattedValue,
-                      selection: TextSelection.collapsed(
-                          offset: formattedValue.length),
-                    );
-                  }
+                  // Update the controller value without forcing ".00"
+                  totalPriceController.value = TextEditingValue(
+                    text: value,
+                    selection: TextSelection.collapsed(offset: value.length),
+                  );
                 } else {
                   // Handle invalid input (optional)
                 }
