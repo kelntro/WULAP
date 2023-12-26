@@ -10,23 +10,6 @@ class UserModel {
   final String? address;
   final List<String> certificationImageUrls;
 
-  // New properties
-  final String? menuItem;
-  final String? category;
-  final String? datePosted;
-  final String? link;
-
-  bool isValid() {
-    return menuItem != null &&
-        category != null &&
-        datePosted != null &&
-        link != null &&
-        menuItem!.isNotEmpty &&
-        category!.isNotEmpty &&
-        datePosted!.isNotEmpty &&
-        link!.isNotEmpty;
-  }
-
   UserModel({
     this.id,
     required this.userName,
@@ -38,10 +21,6 @@ class UserModel {
     this.businessInformation,
     this.address,
     List<String>? certificationImageUrls,
-    this.menuItem,
-    this.category,
-    this.datePosted,
-    this.link,
   }) : certificationImageUrls = certificationImageUrls ?? [];
 
   Map<String, dynamic> toJson() {
@@ -56,10 +35,6 @@ class UserModel {
       "businessInformation": businessInformation,
       "address": address,
       "certificationImageUrls": certificationImageUrls,
-      "menuItem": menuItem,
-      "category": category,
-      "datePosted": datePosted,
-      "link": link,
     };
   }
 
@@ -76,10 +51,6 @@ class UserModel {
       address: json['address'],
       certificationImageUrls:
           List<String>.from(json['certificationImageUrls'] ?? []),
-      menuItem: json['menuItem'],
-      category: json['category'],
-      datePosted: json['datePosted'],
-      link: json['link'],
     );
   }
 
@@ -87,10 +58,6 @@ class UserModel {
   Map<String, dynamic> toMap() {
     return {
       'userName': userName,
-      'menuItem': menuItem ?? '', // Add other properties as needed
-      'category': category ?? '',
-      'datePosted': datePosted ?? '',
-      'link': link ?? '',
     };
   }
 
@@ -98,10 +65,6 @@ class UserModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       userName: map['userName'] ?? '',
-      menuItem: map['menuItem'] ?? '',
-      category: map['category'] ?? '',
-      datePosted: map['datePosted'] ?? '',
-      link: map['link'] ?? '',
       email: '',
       password: '',
     );

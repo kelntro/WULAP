@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'buy_info_screen.dart'; // Import the BuyInfoScreen
+import 'buy_info_screen.dart';
 
 class AsianCuisineScreen extends StatelessWidget {
   // Sample data for items

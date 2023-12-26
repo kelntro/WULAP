@@ -216,14 +216,14 @@ class _FoodMenuInputScreenState extends State<FoodMenuInputScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    if (!_isValidMemberName(newMember.name)) {
+                    if (!RegExp(r'^[a-zA-Z. ]+$').hasMatch(newMember.name)) {
                       _showErrorDialog(
-                          'Please enter a valid member name with letters and spaces only.');
+                          'Please enter a valid member name with letters, spaces, and dots only.');
                       return null;
                     }
 
                     if (!RegExp(
-                      r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
+                      r'^(?!.*@mail\.com$)[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
                     ).hasMatch(newMember.email)) {
                       _showErrorDialog('Please enter a valid email address.');
                       return null;
@@ -235,10 +235,10 @@ class _FoodMenuInputScreenState extends State<FoodMenuInputScreen> {
                       return null;
                     }
 
-                    if (!RegExp(r'^[a-zA-Z0-9. ]+$')
+                    if (!RegExp(r'^[a-zA-Z. ]+$')
                         .hasMatch(newMember.facebookName)) {
                       _showErrorDialog(
-                          'Please enter a valid Facebook account without special characters.');
+                          'Please enter a valid Facebook account without numbers or special characters.');
                       return null;
                     }
 
@@ -293,6 +293,22 @@ class _FoodMenuInputScreenState extends State<FoodMenuInputScreen> {
     return DateFormat('MM-dd-yyyy').format(date);
   }
 
+  void _showErrorDialog(String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Error"),
+        content: Text(errorMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
   List<DropdownMenuItem<String>> getDropdownItems(List<String> items) {
     return items.map((String value) {
       return DropdownMenuItem<String>(
@@ -314,22 +330,6 @@ class _FoodMenuInputScreenState extends State<FoodMenuInputScreen> {
       final formattedDate = DateFormat('MM-dd-yyyy').format(pickedDate);
       controller.text = formattedDate;
     }
-  }
-
-  void _showErrorDialog(String errorMessage) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Error"),
-        content: Text(errorMessage),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text("OK"),
-          ),
-        ],
-      ),
-    );
   }
 
   bool _isValidMemberName(String value) {
@@ -492,7 +492,6 @@ class _FoodMenuInputScreenState extends State<FoodMenuInputScreen> {
   @override
   Widget build(BuildContext context) {
     bool isMenuNamesValid = menuNames.isNotEmpty;
-    bool isAmountValid = isValidNumber(totalPriceController.text);
     bool isStartDateValid = startDateController.text.isNotEmpty;
     return Scaffold(
       appBar: AppBar(
@@ -562,15 +561,30 @@ class _FoodMenuInputScreenState extends State<FoodMenuInputScreen> {
                 labelText: 'Amount',
                 border: OutlineInputBorder(),
               ),
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+              ],
               onChanged: (value) {
-                // You can perform additional validation here if needed
                 if (isValidNumber(value)) {
-                  // Update the controller value without forcing ".00"
-                  totalPriceController.value = TextEditingValue(
-                    text: value,
-                    selection: TextSelection.collapsed(offset: value.length),
-                  );
+                  // Check if the entered value is a whole number
+                  if (value.endsWith('.') || value.contains('.')) {
+                    // Limit the display to two decimal places after the decimal point
+                    double amount = double.parse(value);
+                    String formattedValue = amount.toStringAsFixed(2);
+
+                    // If the entered value is a whole number, add .00
+                    if (amount % 1 == 0) {
+                      formattedValue = amount.toStringAsFixed(2);
+                    }
+
+                    totalPriceController.value =
+                        totalPriceController.value.copyWith(
+                      text: formattedValue,
+                      selection: TextSelection.collapsed(
+                          offset: formattedValue.length),
+                    );
+                  }
                 } else {
                   // Handle invalid input (optional)
                 }
@@ -654,14 +668,12 @@ class _FoodMenuInputScreenState extends State<FoodMenuInputScreen> {
             SizedBox(height: 16),
 
             ElevatedButton(
-              onPressed: members.isNotEmpty &&
-                      isMenuNamesValid &&
-                      isAmountValid &&
-                      isStartDateValid
-                  ? () async {
-                      await _saveFoodMenu(context, widget.categoryID);
-                    }
-                  : null, // Disable button if conditions are not met
+              onPressed:
+                  members.isNotEmpty && isMenuNamesValid && isStartDateValid
+                      ? () async {
+                          await _saveFoodMenu(context, widget.categoryID);
+                        }
+                      : null, // Disable button if conditions are not met
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 fixedSize: Size.fromHeight(35.0),

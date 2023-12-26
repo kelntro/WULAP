@@ -159,10 +159,26 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
         setState(() {
           imagePath = selectedImage.path;
         });
+      } else {
+        // User canceled image selection
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Image selection canceled'),
+            duration: Duration(seconds: 2),
+          ),
+        );
       }
     } catch (e) {
+      // Show an error snackbar
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error selecting image: $e'),
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,
+        ),
+      );
+
       print('Error selecting image: $e');
-      // Handle the error or show a relevant message to the user
     }
   }
 
@@ -180,7 +196,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       textAlign: TextAlign.center,
       onChanged: (value) {
-        // You may add any specific logic here if needed
+        // You may add any logic here if needed
       },
       validator: (value) {
         if (value == null || value.isEmpty) {

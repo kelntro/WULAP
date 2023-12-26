@@ -258,7 +258,7 @@ class _EditCategoryScreenState extends State<EditCategoryScreen> {
           });
         } else {
           // Handle the case where the selected file is not a JPEG or PNG
-          // You can show an error message or perform any other necessary action
+
           print("Invalid file format. Please choose a JPEG or PNG file.");
         }
       }

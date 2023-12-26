@@ -396,8 +396,7 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
 
   Widget _buildProfileField(String label, String value) {
     return Column(
-      crossAxisAlignment:
-          CrossAxisAlignment.start, // Align children to the start (left)
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 14.0),
         Text(
