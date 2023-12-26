@@ -892,13 +892,13 @@ class BuyPage extends StatelessWidget {
     }
   }
 
-  /// Navigates to the notificationsScreen when the action is triggered.
+  // Navigates to the notificationsScreen when the action is triggered.
   onTapImgVector(BuildContext context) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => RemindersListScreen()));
   }
 
-  /// Navigates to the notificationsScreen when the action is triggered.
+  // Navigates to the notificationsScreen when the action is triggered.
   onTapVector(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.notificationsScreen);
   }
