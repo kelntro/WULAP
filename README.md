@@ -123,11 +123,11 @@ We welcome contributions from the community to improve and enhance the WULAP app
 
 ### Issues and Bugs
 
-If you encounter any issues or bugs while using the application, please check the [existing issues](https://github.com/your-username/wulap_application/issues) to see if the problem has already been reported. If not, feel free to [open a new issue](https://github.com/your-username/wulap_application/issues/new) with a detailed description of the problem, including steps to reproduce it.
+If you encounter any issues or bugs while using the application, please check the [existing issues](https://github.com/kelntro/wulap_application/issues) to see if the problem has already been reported. If not, feel free to [open a new issue](https://github.com/kelntro/wulap_application/issues/new) with a detailed description of the problem, including steps to reproduce it.
 
 ### Feature Requests
 
-If you have a feature in mind that you believe would benefit the WULAP application, you can [open a new feature request](https://github.com/your-username/wulap_application/issues/new) on our GitHub repository. Provide as much detail as possible about the proposed feature and why it would be valuable.
+If you have a feature in mind that you believe would benefit the WULAP application, you can [open a new feature request](https://github.com/kelntro/wulap_application/issues/new) on our GitHub repository. Provide as much detail as possible about the proposed feature and why it would be valuable.
 
 ### Pull Requests
 
